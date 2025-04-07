@@ -1,6 +1,6 @@
 import { FormComposerV2, HeaderComponent, Toast } from "@egovernments/digit-ui-components";
 import React, { useState } from "react";
-// import { Compliantconfig } from "../../../configs/compliantConfig/Compliantconfig";
+import { Compliantconfig } from "../../../configs/compliantConfig/Compliantconfig";
 import { extractJsonSchemaData, transformToMdmsFormat, p, parseJsonSchema, transformToFormConfig } from "../../../utils/createUtils";
 import { useHistory } from "react-router-dom";
 // import { config } from "../../../configs/SampleCreateConfig";
@@ -105,6 +105,7 @@ const Createcomplaint = () => {
 
   // const tenantId = Digit.ULBService.getCurrentTenantId();
 
+  
   const mutation = Digit.Hooks.useCustomAPIMutationHook({
     url: "/egov-mdms-service/v2/_create/Assignment.PGRAPPLY",
     params: {},
@@ -153,13 +154,13 @@ const Createcomplaint = () => {
     fontSize: "2vw",
     marginBottom: "1.5rem",
   };
-  console.log(formConfig);
+  // console.log(formConfig);
   return (
     <React.Fragment>
     
       <HeaderComponent styles={style}>{"Create Complaint"}</HeaderComponent>
 
-//form Creation by passing the config
+{/* //form Creation by passing the config */}
       <FormComposerV2
         label={"File Complaint"}
         description={"Submit your complaint by filling in personal, complaint, and location details."}
@@ -170,7 +171,7 @@ const Createcomplaint = () => {
           Landmark: "",
         }}
       
-        config={configs.map((compliant) => {
+        config={Compliantconfig.map((compliant) => {
           return {
             ...compliant,
             body: compliant.body,
