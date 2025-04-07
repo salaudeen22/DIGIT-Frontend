@@ -8,6 +8,9 @@ import ViewEstimateComponent from "./components/ViewEstimateComponent";
 import { overrideHooks, updateCustomConfigs } from "./utils";
 import AdditionalComponentWrapper from "./components/AdditionalComponent";
 import SampleMultiComponent from "./components/SampleMultiComponent";
+import BirthCard from "./components/BirthCard";
+import ImageUpload from "./components/ImageUpload";
+import Complaintcard from "./components/Compliantcard";
 
 // SampleModule component manages the initialization and rendering of the module
 export const SampleModule = ({ stateCode, userType, tenants }) => {
@@ -44,6 +47,9 @@ const componentsToRegister = {
   SampleModule,
   SampleCard,
   HRMSCard,
+  Complaintcard,
+  // ImageUpload,
+  BirthCard,
   ViewEstimatePage: ViewEstimateComponent,
   SampleAdditionalComponent: AdditionalComponentWrapper,
   SampleMultiComponent: SampleMultiComponent,

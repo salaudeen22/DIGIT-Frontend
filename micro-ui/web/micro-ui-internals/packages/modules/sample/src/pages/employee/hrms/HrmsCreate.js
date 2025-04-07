@@ -28,6 +28,10 @@ const HRMSCreate = () => {
     },
   };
 
+
+  console.log("reqCreate"+reqCreate);
+  
+
   // Custom hook for handling API mutation requests
   const mutation = Digit.Hooks.useCustomAPIMutationHook(reqCreate);
 

@@ -25,6 +25,9 @@ import SampleSearch from "./uiComponentsSample/SampleSearch";
 import SampleInbox from "./uiComponentsSample/SampleInbox";
 import SampleView from "./uiComponentsSample/SampleView";
 
+import Mycreate from "./myCreate/Mycreate";
+import Createcomplaint from "./complaint-registration-ui/createcomplaint";
+import SummaryComplaint from "./complaint-registration-ui/SummaryComplaint";
 const SampleBreadCrumbs = ({ location }) => {
   const { t } = useTranslation();
   const crumbs = [
@@ -60,8 +63,8 @@ const App = ({ path, stateCode, userType, tenants }) => {
         <PrivateRoute path={`${path}/response`} component={() => <Response></Response>} />
 
         <PrivateRoute path={`${path}/sample-create`} component={() => <Create></Create>} />
-        <PrivateRoute path={`${path}/sample-search`} component={() => <SearchWageSeeker></SearchWageSeeker>} />    
-        <PrivateRoute path={`${path}/sample-view`} component={() =>  <ViewIndividual />} />
+        <PrivateRoute path={`${path}/sample-search`} component={() => <SearchWageSeeker></SearchWageSeeker>} />
+        <PrivateRoute path={`${path}/sample-view`} component={() => <ViewIndividual />} />
         <PrivateRoute path={`${path}/sample-components`} component={() => <SampleComponents />} />
         <PrivateRoute path={`${path}/sample-success`} component={() => <PanelCardResponse />} />
         <PrivateRoute path={`${path}/tab-search-individual`} component={() => <TabIndividualSearch />} />
@@ -74,6 +77,12 @@ const App = ({ path, stateCode, userType, tenants }) => {
         <PrivateRoute path={`${path}/search`} component={() => <SampleSearch />} />
         <PrivateRoute path={`${path}/inbox`} component={() => <SampleInbox />} />
         <PrivateRoute path={`${path}/view`} component={() => <SampleView />} />
+
+        <PrivateRoute path={`${path}/mycreate`} component={() => <Mycreate />} />
+
+        {/* Complaint Ui */}
+        <PrivateRoute path={`${path}/createcomplaint`} component={() => <Createcomplaint />} />
+        <PrivateRoute path={`${path}/summary`} component={() => <SummaryComplaint />} />
       </AppContainer>
     </Switch>
   );

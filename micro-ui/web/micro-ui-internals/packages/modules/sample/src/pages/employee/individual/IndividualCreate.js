@@ -18,9 +18,11 @@ const IndividualCreate = () => {
     params: {},
     body: {},
     config: {
-      enable: false,
+      enable: true,
     },
   };
+
+  console.log(reqCreate.config);
 
   const mutation = Digit.Hooks.useCustomAPIMutationHook(reqCreate);
 
