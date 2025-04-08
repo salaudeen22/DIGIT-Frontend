@@ -98,17 +98,17 @@ const Createcomplaint = () => {
     step3: Compliantconfig.slice(2, 3), // Complaint Location
   };
 
-  //extract the schema into config
-  // const configs=extractJsonSchemaData(schema,schema.required||[]);
-  // const formConfig = transformToFormConfig(configs);
-  // console.log("configs:", configs);
+
+  const configs=extractJsonSchemaData(schema,schema.required||[]);
+  const formConfig = transformToFormConfig(configs);
+  console.log("configs:", configs);
 
   //send the Api res to summary page
   const [res, setRes] = useState();
 
-  // const formConfigs = Object.values(configs);
-  // console.log("triiger");
-  // console.log("form",formConfigs);
+  const formConfigs = Object.values(configs);
+
+  console.log("form",formConfigs);
 
   const history = useHistory();
 
@@ -212,6 +212,7 @@ const Createcomplaint = () => {
       <FormComposerV2
         label={stepper ? `Step ${currentStep}` : "File Complaint"}
         config={stepper ? stepConfigs[`step${currentStep}`] : Object.values(stepConfigs).flat()}
+        // config={formConfigs}
         onSubmit={(stepData) => {
           const updatedData = { ...formData, ...stepData };
           console.log(updatedData);
@@ -221,6 +222,10 @@ const Createcomplaint = () => {
               setFormData(updatedData); 
               setCurrentStep(currentStep + 1);
             } else {
+              if (!updatedData.complaintType || !Array.isArray(updatedData.complaintType)) {
+                console.error("complaintType is missing or not an array");
+                return;
+              }
               onSubmit(updatedData); 
             }
           } else {
