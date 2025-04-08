@@ -93,51 +93,51 @@ export const Compliantconfig = [
       },
     ],
   },
-  {
-    head: "Configuration Options",
-    body: [
-      {
-        inline: false,
-        isMandatory: false,
-        type: "checkbox",
-        disable: false,
-        withoutLabel: true,
-        populators: {
-          name: "checkbox-isAddress",
-          error: "Error!",
-          title: "Is Address Required?",
-        },
-      },
-      {
-        inline: false,
-        isMandatory: false,
-        type: "checkbox",
-        disable: false,
-        withoutLabel: true,
-        populators: {
-          name: "checkbox-isStepper",
-          error: "Error!",
-          title: "Use Stepper Navigation?",
-        },
-      },
-    ],
-  },
-  //   {
-  //     head: "File Upload",
-  //     body: [
-  //       {
-  //         inline: true,
-  //         type: "components",
-  //         component: "ImageUpload",
-  //         label: "Upload Picture",
-  //         populators: {
-  //           name: "pictureUpload",
-  //           error: "Error!",
-  //           onUpload: (fileStoreId) => {
-  //             console.log("Uploaded file store ID:", fileStoreId);
-  //           },
-  //         },
+  // {
+  //   head: "Configuration Options",
+  //   body: [
+  //     {
+  //       inline: false,
+  //       isMandatory: false,
+  //       type: "checkbox",
+  //       disable: false,
+  //       withoutLabel: true,
+  //       populators: {
+  //         name: "checkbox-isAddress",
+  //         error: "Error!",
+  //         title: "Is Address Required?",
   //       },
-  //     ],
-  //   },
+  //     },
+  //     {
+  //       inline: false,
+  //       isMandatory: false,
+  //       type: "checkbox",
+  //       disable: false,
+  //       withoutLabel: true,
+  //       populators: {
+  //         name: "checkbox-isStepper",
+  //         error: "Error!",
+  //         title: "Use Stepper Navigation?",
+  //       },
+  //     },
+  //   ],
+  // },
+    // {
+    //   head: "File Upload",
+    //   body: [
+    //     {
+    //       inline: true,
+    //       type: "component",
+    //       component: "ImageUpload",
+    //       label: "Upload Picture",
+    //       populators: {
+    //         name: "pictureUpload",
+    //         error: "Error!",
+    //         onUpload: (fileStoreId) => {
+    //           console.log("Uploaded file store ID:", fileStoreId);
+    //         },
+    //       },
+    //     },
+    //   ],
+    // },
 ];

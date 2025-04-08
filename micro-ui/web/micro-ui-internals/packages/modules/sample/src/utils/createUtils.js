@@ -175,8 +175,8 @@ export const transformToMdmsFormat = (data) => {
       uniqueIdentifier: null,
       data: {
         config: {
-          isAddress: data["checkbox-isAddress"] || false,
-          isStepper: data["checkbox-isStepper"] || false,
+          isAddress:data.config.isAddress  || false,
+          isStepper: data.config.isStepper || false,
         },
         complaintType: data.complaintType.map((type) => ({
           code: type.code,
@@ -190,9 +190,9 @@ export const transformToMdmsFormat = (data) => {
         },
         citizenName: data.citizenName,
         citizenMobileNumber: Number(data.citizenMobileNumber),
-        //   pictureUpload: {
-        //     type: "documentUpload",
-        //   },
+          // pictureUpload: {
+          //   type: "documentUpload",
+          // },
       },
       isActive: true,
     },

@@ -1,12 +1,17 @@
-import { FormComposerV2, HeaderComponent, Toast } from "@egovernments/digit-ui-components";
+import { FormComposerV2, HeaderComponent, Stepper, Switch, Toast } from "@egovernments/digit-ui-components";
 import React, { useState } from "react";
 import { Compliantconfig } from "../../../configs/compliantConfig/Compliantconfig";
 import { extractJsonSchemaData, transformToMdmsFormat, p, parseJsonSchema, transformToFormConfig } from "../../../utils/createUtils";
 import { useHistory } from "react-router-dom";
+import { Button } from "@egovernments/digit-ui-components";
+
 // import { config } from "../../../configs/SampleCreateConfig";
 
 const Createcomplaint = () => {
   const [showToast, setShowToast] = useState(false);
+  const [stepper, setStepper] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [formData, setFormData] = useState({});
   const schema = {
     type: "object",
     title: "Assignment.PGRAPPLY",
@@ -87,7 +92,11 @@ const Createcomplaint = () => {
     },
     additionalProperties: false,
   };
-
+  const stepConfigs = {
+    step1: Compliantconfig.slice(0, 1), // Citizen Details
+    step2: Compliantconfig.slice(1, 2), // Complaint Details
+    step3: Compliantconfig.slice(2, 3), // Complaint Location
+  };
 
   //extract the schema into config
   // const configs=extractJsonSchemaData(schema,schema.required||[]);
@@ -105,7 +114,6 @@ const Createcomplaint = () => {
 
   // const tenantId = Digit.ULBService.getCurrentTenantId();
 
-  
   const mutation = Digit.Hooks.useCustomAPIMutationHook({
     url: "/egov-mdms-service/v2/_create/Assignment.PGRAPPLY",
     params: {},
@@ -116,11 +124,23 @@ const Createcomplaint = () => {
   });
 
   const onSubmit = async (data) => {
+    console.log("Onsubmit Triggered");
+    data={
+      ...data,
+      config:{
+        isStepper:stepper,
+        isAddress:true,
+        
+      }
+    }
+    // console.log("Data",data);
+    const payload = transformToMdmsFormat(data);
+    // console.log(payload);
     await mutation.mutate(
       {
         url: "/egov-mdms-service/v2/_create/Assignment.PGRAPPLY",
         params: {},
-        body: transformToMdmsFormat(data),
+        body: payload,
         config: {
           enabled: true,
         },
@@ -130,7 +150,7 @@ const Createcomplaint = () => {
           console.log("Success:", res);
           setRes(res);
           setShowToast({ key: "success", label: "Complaint Created Successfully" });
-          
+
           history.push(`/${window?.contextPath}/employee/sample/summary`, { response: res });
         },
         onError: (err) => {
@@ -154,36 +174,63 @@ const Createcomplaint = () => {
     fontSize: "2vw",
     marginBottom: "1.5rem",
   };
-  // console.log(formConfig);
+ 
   return (
     <React.Fragment>
-    
-      <HeaderComponent styles={style}>{"Create Complaint"}</HeaderComponent>
-
-{/* //form Creation by passing the config */}
-      <FormComposerV2
-        label={"File Complaint"}
-        description={"Submit your complaint by filling in personal, complaint, and location details."}
-        defaultValue={{
-          City: "",
-          Address: "",
-          Pincode: "",
-          Landmark: "",
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
         }}
-      
-        config={Compliantconfig.map((compliant) => {
-          return {
-            ...compliant,
-            body: compliant.body,
-          };
-        })}
-        //configruation of extracted file 
-        // config={formConfig}
-        onSubmit={onSubmit}
+      >
+        <HeaderComponent styles={style}>{"Create Complaint"}</HeaderComponent>
+
+        <Switch
+          label="isStepper"
+          onToggle={() => {
+            setStepper(!stepper);
+          }}
+        />
+      </div>
+      {stepper && (
+        <Stepper
+          activeSteps={currentStep}
+          currentStep={currentStep}
+          customSteps={{}}
+          direction="horizontal"
+          onChange={function noRefCheck() {}}
+          onStepClick={(e) => {
+            console.log(e.target.value);
+          }}
+          populators={{ name: "stepper" }}
+          props={{ labelStyles: {} }}
+          style={{ marginBottom: "2rem" }}
+          totalSteps={3}
+        />
+      )}
+      <FormComposerV2
+        label={stepper ? `Step ${currentStep}` : "File Complaint"}
+        config={stepper ? stepConfigs[`step${currentStep}`] : Object.values(stepConfigs).flat()}
+        onSubmit={(stepData) => {
+          const updatedData = { ...formData, ...stepData };
+          console.log(updatedData);
+
+          if (stepper) {
+            if (currentStep < Object.keys(stepConfigs).length) {
+              setFormData(updatedData); 
+              setCurrentStep(currentStep + 1);
+            } else {
+              onSubmit(updatedData); 
+            }
+          } else {
+            onSubmit(stepData);
+          }
+        }}
         onFormValueChange={onFormValueChange}
       />
-
-      //showing the success and error toast
+      {/* //form Creation by passing the config */}
+      {/* //showing the success and error toast */}
       {showToast && (
         <Toast
           style={{ zIndex: 10001 }}

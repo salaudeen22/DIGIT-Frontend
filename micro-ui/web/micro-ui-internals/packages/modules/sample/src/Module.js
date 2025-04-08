@@ -11,6 +11,7 @@ import SampleMultiComponent from "./components/SampleMultiComponent";
 import BirthCard from "./components/BirthCard";
 import ImageUpload from "./components/ImageUpload";
 import Complaintcard from "./components/Compliantcard";
+import CompliantRouteCard from "./components/CompliantRouteCard";
 
 // SampleModule component manages the initialization and rendering of the module
 export const SampleModule = ({ stateCode, userType, tenants }) => {
@@ -48,8 +49,10 @@ const componentsToRegister = {
   SampleCard,
   HRMSCard,
   Complaintcard,
-  // ImageUpload,
-  BirthCard,
+  ImageUpload,
+  Complaintcard,
+  CompliantRouteCard,
+ 
   ViewEstimatePage: ViewEstimateComponent,
   SampleAdditionalComponent: AdditionalComponentWrapper,
   SampleMultiComponent: SampleMultiComponent,
