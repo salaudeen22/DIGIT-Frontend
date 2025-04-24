@@ -93,6 +93,11 @@ export const Compliantconfig = [
       },
     ],
   },
+  {
+    config:{
+      "isStepper": true
+    }
+  }
   // {
   //   head: "Configuration Options",
   //   body: [
@@ -122,22 +127,22 @@ export const Compliantconfig = [
   //     },
   //   ],
   // },
-    // {
-    //   head: "File Upload",
-    //   body: [
-    //     {
-    //       inline: true,
-    //       type: "component",
-    //       component: "ImageUpload",
-    //       label: "Upload Picture",
-    //       populators: {
-    //         name: "pictureUpload",
-    //         error: "Error!",
-    //         onUpload: (fileStoreId) => {
-    //           console.log("Uploaded file store ID:", fileStoreId);
-    //         },
-    //       },
-    //     },
-    //   ],
-    // },
+  // {
+  //   head: "File Upload",
+  //   body: [
+  //     {
+  //       inline: true,
+  //       type: "component",
+  //       component: "ImageUpload",
+  //       label: "Upload Picture",
+  //       populators: {
+  //         name: "pictureUpload",
+  //         error: "Error!",
+  //         onUpload: (fileStoreId) => {
+  //           console.log("Uploaded file store ID:", fileStoreId);
+  //         },
+  //       },
+  //     },
+  //   ],
+  // },
 ];

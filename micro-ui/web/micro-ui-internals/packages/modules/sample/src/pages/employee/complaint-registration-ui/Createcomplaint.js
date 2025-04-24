@@ -98,8 +98,7 @@ const Createcomplaint = () => {
     step3: Compliantconfig.slice(2, 3), // Complaint Location
   };
 
-
-  const configs=extractJsonSchemaData(schema,schema.required||[]);
+  const configs = extractJsonSchemaData(schema, schema.required || []);
   const formConfig = transformToFormConfig(configs);
   console.log("configs:", configs);
 
@@ -108,7 +107,7 @@ const Createcomplaint = () => {
 
   const formConfigs = Object.values(configs);
 
-  console.log("form",formConfigs);
+  console.log("form", formConfigs);
 
   const history = useHistory();
 
@@ -125,14 +124,13 @@ const Createcomplaint = () => {
 
   const onSubmit = async (data) => {
     console.log("Onsubmit Triggered");
-    data={
+    data = {
       ...data,
-      config:{
-        isStepper:stepper,
-        isAddress:true,
-        
-      }
-    }
+      config: {
+        isStepper: stepper,
+        isAddress: true,
+      },
+    };
     // console.log("Data",data);
     const payload = transformToMdmsFormat(data);
     // console.log(payload);
@@ -174,7 +172,7 @@ const Createcomplaint = () => {
     fontSize: "2vw",
     marginBottom: "1.5rem",
   };
- 
+
   return (
     <React.Fragment>
       <div
@@ -219,14 +217,14 @@ const Createcomplaint = () => {
 
           if (stepper) {
             if (currentStep < Object.keys(stepConfigs).length) {
-              setFormData(updatedData); 
+              setFormData(updatedData);
               setCurrentStep(currentStep + 1);
             } else {
               if (!updatedData.complaintType || !Array.isArray(updatedData.complaintType)) {
                 console.error("complaintType is missing or not an array");
                 return;
               }
-              onSubmit(updatedData); 
+              onSubmit(updatedData);
             }
           } else {
             onSubmit(stepData);

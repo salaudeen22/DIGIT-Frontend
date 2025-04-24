@@ -170,7 +170,7 @@ export const transformHRMSCreateData = (data) => {
 export const transformToMdmsFormat = (data) => {
   return {
     Mdms: {
-      tenantId: "dev", // or dynamic if available
+      tenantId: "dev",
       schemaCode: "Assignment.PGRAPPLY",
       uniqueIdentifier: null,
       data: {
